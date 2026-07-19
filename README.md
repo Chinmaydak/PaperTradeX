@@ -1,6 +1,6 @@
 PaperTradeX
 
-A client-side paper trading simulator built with HTML, CSS, and JavaScript. No backend, no frameworks — everything runs in the browser.
+PaperTradeX is a paper trading simulator that runs entirely in the browser. Trade virtual stocks with live-updating prices, track your portfolio value and profit/loss in real time, and build your trading instincts risk-free using simulated market data.
 
 
 What it does
