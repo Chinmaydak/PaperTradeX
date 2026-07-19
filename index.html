@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PaperTrade — Practice Trading Terminal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Signature element: scrolling ticker tape -->
+  <div class="ticker-tape" aria-hidden="true">
+    <div class="ticker-track" id="tickerTrack"></div>
+    <div class="ticker-track" id="tickerTrackDup"></div>
+  </div>
+
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-mark">◆</span>
+      <div class="brand-text">
+        <h1>PaperTrade</h1>
+        <p>practice terminal · virtual money only</p>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-item">
+        <span class="summary-label">Cash</span>
+        <span class="summary-value" id="cashValue">$0.00</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">Holdings</span>
+        <span class="summary-value" id="holdingsValue">$0.00</span>
+      </div>
+      <div class="summary-item summary-item--total">
+        <span class="summary-label">Net Worth</span>
+        <span class="summary-value" id="netWorthValue">$0.00</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">Total P/L</span>
+        <span class="summary-value" id="totalPL">$0.00</span>
+      </div>
+      <button class="reset-btn" id="resetBtn" title="Reset simulation">Reset</button>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <!-- Left: trade panel -->
+    <section class="panel trade-panel">
+      <div class="panel-head">
+        <h2>Trade</h2>
+        <select id="stockSelect" class="stock-select"></select>
+      </div>
+
+      <div class="quote">
+        <div class="quote-price">
+          <span id="quotePrice">$0.00</span>
+          <span class="quote-change" id="quoteChange">+0.00 (0.00%)</span>
+        </div>
+        <button class="watch-toggle" id="watchToggle">☆ Watch</button>
+      </div>
+
+      <canvas id="sparkline" class="sparkline" height="140"></canvas>
+
+      <form class="trade-form" id="tradeForm">
+        <label for="qtyInput">Quantity</label>
+        <input type="number" id="qtyInput" min="1" step="1" value="1" required>
+        <div class="trade-cost">Est. cost: <span id="estCost">$0.00</span></div>
+        <div class="trade-buttons">
+          <button type="submit" class="btn btn-buy" id="buyBtn">Buy</button>
+          <button type="button" class="btn btn-sell" id="sellBtn">Sell</button>
+        </div>
+        <p class="trade-msg" id="tradeMsg"></p>
+      </form>
+    </section>
+
+    <!-- Right: tabs -->
+    <section class="panel tabs-panel">
+      <div class="tabs" role="tablist">
+        <button class="tab-btn active" data-tab="holdings" role="tab">Holdings</button>
+        <button class="tab-btn" data-tab="watchlist" role="tab">Watchlist</button>
+        <button class="tab-btn" data-tab="history" role="tab">History</button>
+      </div>
+
+      <div class="tab-content active" id="tab-holdings">
+        <table class="data-table">
+          <thead>
+            <tr><th>Symbol</th><th>Qty</th><th>Avg Cost</th><th>Price</th><th>Value</th><th>P/L</th></tr>
+          </thead>
+          <tbody id="holdingsBody"></tbody>
+        </table>
+        <p class="empty-state" id="holdingsEmpty">No positions yet. Place your first trade on the left.</p>
+      </div>
+
+      <div class="tab-content" id="tab-watchlist">
+        <table class="data-table">
+          <thead>
+            <tr><th>Symbol</th><th>Name</th><th>Price</th><th>Change</th><th></th></tr>
+          </thead>
+          <tbody id="watchlistBody"></tbody>
+        </table>
+        <p class="empty-state" id="watchlistEmpty">Your watchlist is empty. Star a stock to track it here.</p>
+      </div>
+
+      <div class="tab-content" id="tab-history">
+        <table class="data-table">
+          <thead>
+            <tr><th>Time</th><th>Side</th><th>Symbol</th><th>Qty</th><th>Price</th><th>Total</th></tr>
+          </thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+        <p class="empty-state" id="historyEmpty">No transactions yet.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Simulated prices for practice only — not real market data. Built with HTML, CSS &amp; JavaScript.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
